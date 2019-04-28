@@ -2,6 +2,24 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:switchit.xcodeproj">
+      location = "group:../switchit/DDHotKeyCenter.h">
+   </FileRef>
+   <FileRef
+      location = "group:../switchit/DDHotKeyCenter.m">
+   </FileRef>
+   <FileRef
+      location = "group:../switchit/DDHotKeyTextField.h">
+   </FileRef>
+   <FileRef
+      location = "group:../switchit/DDHotKeyTextField.m">
+   </FileRef>
+   <FileRef
+      location = "group:../switchit/DDHotKeyUtilities.h">
+   </FileRef>
+   <FileRef
+      location = "group:../switchit/DDHotKeyUtilities.m">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

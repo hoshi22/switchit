@@ -11,6 +11,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ViewController.globalHotKeyHandler(event:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSApplication.shared.mainWindow!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ViewController.tableView(_:viewFor:row:):ViewController.swift">
          <PersistentStrings>
             <PersistentString

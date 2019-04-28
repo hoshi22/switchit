@@ -33,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CB0278C12274EC97003F08EA /* switchit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "switchit-Bridging-Header.h"; sourceTree = "<group>"; };
 		CBA978DB22678BB000AC8601 /* switchit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = switchit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA978DE22678BB000AC8601 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CBA978E022678BB000AC8601 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 				CBA978E422678BB100AC8601 /* Main.storyboard */,
 				CBA978E722678BB100AC8601 /* Info.plist */,
 				CBA978E822678BB100AC8601 /* switchit.entitlements */,
+				CB0278C12274EC97003F08EA /* switchit-Bridging-Header.h */,
 			);
 			path = switchit;
 			sourceTree = "<group>";
@@ -192,6 +194,7 @@
 				TargetAttributes = {
 					CBA978DA22678BB000AC8601 = {
 						CreatedOnToolsVersion = 10.2;
+						LastSwiftMigration = 1020;
 					};
 					CBA978EC22678BB100AC8601 = {
 						CreatedOnToolsVersion = 10.2;
@@ -421,9 +424,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = switchit/switchit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = switchit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -431,6 +439,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = switchit.com.switchit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "switchit/switchit-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -439,9 +449,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = switchit/switchit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = switchit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -449,6 +464,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = switchit.com.switchit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "switchit/switchit-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

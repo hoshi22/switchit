@@ -7,14 +7,35 @@
 //
 
 import Cocoa
+import Carbon
+
 
 class ViewController: NSViewController {
 
     @IBOutlet weak var tableView: NSTableView!
     var data: [[String: AnyObject]]?
     
+//    let keycode = 48 // TAB key
+//    let keymask: NSEvent.ModifierFlags = .option // OPTION key
+    
+//    func globalHotKeyHandler(event: NSEvent!) {
+//        if event.keyCode == self.keycode && (event.modifierFlags.rawValue & keymask.rawValue == keymask.rawValue) {
+//            print("PRESSED")
+////            print(NSApplication.shared.mainWindow?.windowController?.window!)
+//        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+//        //***** BEGINNING OF Key Combo handling stuff *****
+//        let options = NSDictionary(object: kCFBooleanTrue!, forKey: kAXTrustedCheckOptionPrompt.takeUnretainedValue() as NSString) as CFDictionary
+//        let trusted = AXIsProcessTrustedWithOptions(options)
+//        if (trusted) {
+//            print(options)
+//            NSEvent.addGlobalMonitorForEvents(matching: [.keyDown], handler: self.globalHotKeyHandler(event:))
+//        }
+//        //***** END OF Key Combo handling stuff *****
         
         tableView.delegate = self
         tableView.dataSource = self
