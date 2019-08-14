@@ -9,54 +9,50 @@
 import Cocoa
 import Carbon
 
+let itemsSize = 10
 
 class ViewController: NSViewController {
 
     @IBOutlet weak var tableView: NSTableView!
-    var data: [[String: AnyObject]]?
-    
-//    let keycode = 48 // TAB key
-//    let keymask: NSEvent.ModifierFlags = .option // OPTION key
-    
-//    func globalHotKeyHandler(event: NSEvent!) {
-//        if event.keyCode == self.keycode && (event.modifierFlags.rawValue & keymask.rawValue == keymask.rawValue) {
-//            print("PRESSED")
-////            print(NSApplication.shared.mainWindow?.windowController?.window!)
-//        }
-//    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var apps_list: [[String: AnyObject]]?
 
-//        //***** BEGINNING OF Key Combo handling stuff *****
-//        let options = NSDictionary(object: kCFBooleanTrue!, forKey: kAXTrustedCheckOptionPrompt.takeUnretainedValue() as NSString) as CFDictionary
-//        let trusted = AXIsProcessTrustedWithOptions(options)
-//        if (trusted) {
-//            print(options)
-//            NSEvent.addGlobalMonitorForEvents(matching: [.keyDown], handler: self.globalHotKeyHandler(event:))
-//        }
-//        //***** END OF Key Combo handling stuff *****
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
+    // Refresh list of applications running
+    func refreshAppsList() {
         let ws = NSWorkspace.shared
         let apps = ws.runningApplications
-        data = []
+        apps_list = []
         var ind = 1
         for app in apps {
             // Would like to see only running GUI apps
             if app.activationPolicy.rawValue == 0 {
-                data?.append(["Num": ind as AnyObject, "App": app])
+                apps_list?.append(["Num": ind as AnyObject, "App": app])
                 ind += 1
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        var test: [[Int: NSRunningApplication]] = []
-        for curr in apps.enumerated() {
-            test.append([curr.offset: curr.element])
-        }
+        tableView.delegate = self
+        tableView.dataSource = self
 
+        print("List row height:", tableView.rowHeight)
+        print("Current view size: ", self.view.frame.size)
+        self.view.frame.size = NSSize(width: 400, height: (itemsSize * 42) + 6)
+        print("New view size: ", self.view.frame.size)
+        self.view.window?.center()
+        
+        refreshAppsList()
+        tableView.reloadData()
+        
+        // Select the first row by default
+        tableView.selectRowIndexes([0], byExtendingSelection: true)
+    }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        self.refreshAppsList()
         tableView.reloadData()
     }
 
@@ -68,8 +64,9 @@ class ViewController: NSViewController {
     
     override func keyDown(with event: NSEvent) {
         if event.keyCode == 36 {
-            let app = data![self.tableView.selectedRow]["App"]!
-            _ = app.activate(options: NSApplication.ActivationOptions.activateAllWindows)
+            NSRunningApplication.current.hide()
+            let app = apps_list![self.tableView.selectedRow]["App"]!
+            _ = app.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
         }
     }
 }
@@ -77,11 +74,11 @@ class ViewController: NSViewController {
 extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return data?.count ?? 0
+        return apps_list?.count ?? 0
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let item = (data!)[row]
+        let item = (apps_list!)[row]
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as? NSTableCellView
         let val = item[(tableColumn?.identifier.rawValue)!]!
         switch tableColumn!.identifier.rawValue {

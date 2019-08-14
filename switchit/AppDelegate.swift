@@ -7,56 +7,53 @@
 //
 
 import Cocoa
+import Carbon
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
-    let keycode = 48 // TAB key
-    let keymask: NSEvent.ModifierFlags = .option // OPTION key
-    var myWin: NSWindow? = nil
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        
+        //***************** Registering global hot kay handler *******************************************************************
+        var gMyHotKeyID = EventHotKeyID()
+        gMyHotKeyID.signature = OSType(1234)
+        gMyHotKeyID.id = UInt32(48)
+        
+        var eventType = EventTypeSpec()
+        eventType.eventClass = OSType(kEventClassKeyboard)
+        eventType.eventKind = OSType(kEventHotKeyPressed)
+        
+        var myHotKeyRef = EventHotKeyRef.init(bitPattern: 1154541)
+        
+        // Install handler.
+        InstallEventHandler(GetApplicationEventTarget(), {(nextHanlder, theEvent, userData) -> OSStatus in
+            var hkCom = EventHotKeyID()
+            GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout.size(ofValue: EventHotKeyID.self), nil, &hkCom)
+            
+                // Activate Switchit app by hotkey registered below in RegisterEventHotkey
+                NSRunningApplication.current.activate(options: [NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            return 12345
+        }, 1, &eventType, nil, nil)
+        
+        // Register hotkey "Option (Alt) + Tab"
+        _ = RegisterEventHotKey(48, UInt32(optionKey), gMyHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef)
+        //************************************************************************************
         
         if let button = statusItem.button {
             button.image = NSImage(named:NSImage.Name("switchit-dock-icon"))
             button.action = #selector(printQuote(_:))
-            
-            self.myWin = NSApplication.shared.keyWindow!
-            print(self.myWin)
-//            myWin.makeKeyAndOrderFront(self)
-//            print(myWin)
-            
-            //***** BEGINNING OF Key Combo handling stuff *****
-            let options = NSDictionary(object: kCFBooleanTrue!, forKey: kAXTrustedCheckOptionPrompt.takeUnretainedValue() as NSString) as CFDictionary
-            let trusted = AXIsProcessTrustedWithOptions(options)
-            if (trusted) {
-                print(options)
-                NSEvent.addGlobalMonitorForEvents(matching: [.keyDown], handler: self.globalHotKeyHandler(event:))
-            }
-            //***** END OF Key Combo handling stuff *****
-            
-        }
-    }
-    
-    func globalHotKeyHandler(event: NSEvent!) {
-        if event.keyCode == self.keycode && (event.modifierFlags.rawValue & keymask.rawValue == keymask.rawValue) {
-            print("PRESSED")
-//            let myWin: NSWindow = NSApplication.shared.keyWindow!
-            self.myWin?.makeKeyAndOrderFront(self)
-            //            print(NSApplication.shared.mainWindow?.windowController?.window!)
         }
     }
     
     @objc func printQuote(_ sender: Any?) {
         let quoteText = "Never put off until tomorrow what you can do the day after tomorrow."
         let quoteAuthor = "Mark Twain"
-        
         print("\(quoteText) — \(quoteAuthor)")
     }
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
