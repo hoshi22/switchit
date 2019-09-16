@@ -3,6 +3,20 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "ViewController.tableView(_:viewFor:row:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "String(Int(val))">
+            </PersistentString>
+            <PersistentString
+               value = "tableColumn!.identifier.rawValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.refreshAppsList():ViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "ViewController.viewDidLoad():ViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -18,17 +32,6 @@
          <PersistentStrings>
             <PersistentString
                value = "NSApplication.shared.mainWindow!">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.tableView(_:viewFor:row:):ViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "String(Int(val))">
-            </PersistentString>
-            <PersistentString
-               value = "tableColumn!.identifier.rawValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

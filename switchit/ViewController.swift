@@ -11,15 +11,63 @@ import Carbon
 
 let itemsSize = 10
 
+class TableView: NSTableView {
+    
+    override func keyDown(with event: NSEvent) {
+        let viewController = NSApplication.shared.keyWindow!.contentViewController as! ViewController
+        let apps = viewController.apps_list
+        let kCode = event.keyCode
+        
+        switch kCode {
+        case 36:
+            NSRunningApplication.current.hide()
+            _ = apps![self.selectedRow]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        case 18:
+            NSRunningApplication.current.hide()
+            _ = apps![0]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        case 19:
+            NSRunningApplication.current.hide()
+            _ = apps![1]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        case 20:
+            NSRunningApplication.current.hide()
+            _ = apps![2]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        case 21:
+            NSRunningApplication.current.hide()
+            _ = apps![3]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        case 23:
+            NSRunningApplication.current.hide()
+            _ = apps![4]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        case 22:
+            NSRunningApplication.current.hide()
+            _ = apps![5]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        case 26:
+            NSRunningApplication.current.hide()
+            _ = apps![6]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        case 28:
+            NSRunningApplication.current.hide()
+            _ = apps![7]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        case 25:
+            NSRunningApplication.current.hide()
+            _ = apps![8]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        case 29:
+            NSRunningApplication.current.hide()
+            _ = apps![9]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+        default:
+            super.keyDown(with: event)
+        }
+    }
+}
+
 class ViewController: NSViewController {
 
-    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var tableView: TableView!
     var apps_list: [[String: AnyObject]]?
 
     // Refresh list of applications running
     func refreshAppsList() {
         let ws = NSWorkspace.shared
-        let apps = ws.runningApplications
+        // Get alphabet sorted list of running applications
+        let apps = ws.runningApplications.sorted(by: {(($0 as AnyObject).localizedName as String?)!.lowercased() < (($1 as AnyObject).localizedName as String?)!.lowercased() })
         apps_list = []
         var ind = 1
         for app in apps {
@@ -37,6 +85,7 @@ class ViewController: NSViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
+        // Adjust rows coantity to the height of app window, center the window
         print("List row height:", tableView.rowHeight)
         print("Current view size: ", self.view.frame.size)
         self.view.frame.size = NSSize(width: 400, height: (itemsSize * 42) + 6)
@@ -59,14 +108,6 @@ class ViewController: NSViewController {
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
-        }
-    }
-    
-    override func keyDown(with event: NSEvent) {
-        if event.keyCode == 36 {
-            NSRunningApplication.current.hide()
-            let app = apps_list![self.tableView.selectedRow]["App"]!
-            _ = app.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
         }
     }
 }
