@@ -17,41 +17,42 @@ class TableView: NSTableView {
         let viewController = NSApplication.shared.keyWindow!.contentViewController as! ViewController
         let apps = viewController.apps_list
         let kCode = event.keyCode
+        let actOpts: NSApplication.ActivationOptions = [.activateAllWindows, .activateIgnoringOtherApps]
         
         switch kCode {
         case 36:
             NSRunningApplication.current.hide()
-            _ = apps![self.selectedRow]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[self.selectedRow].activate(options: actOpts)
         case 18:
             NSRunningApplication.current.hide()
-            _ = apps![0]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[0].activate(options: actOpts)
         case 19:
             NSRunningApplication.current.hide()
-            _ = apps![1]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[1].activate(options: actOpts)
         case 20:
             NSRunningApplication.current.hide()
-            _ = apps![2]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[2].activate(options: actOpts)
         case 21:
             NSRunningApplication.current.hide()
-            _ = apps![3]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[3].activate(options: actOpts)
         case 23:
             NSRunningApplication.current.hide()
-            _ = apps![4]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[4].activate(options: actOpts)
         case 22:
             NSRunningApplication.current.hide()
-            _ = apps![5]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[5].activate(options: actOpts)
         case 26:
             NSRunningApplication.current.hide()
-            _ = apps![6]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[6].activate(options: actOpts)
         case 28:
             NSRunningApplication.current.hide()
-            _ = apps![7]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[7].activate(options: actOpts)
         case 25:
             NSRunningApplication.current.hide()
-            _ = apps![8]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[8].activate(options: actOpts)
         case 29:
             NSRunningApplication.current.hide()
-            _ = apps![9]["App"]!.activate(options: [NSApplication.ActivationOptions.activateAllWindows, NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            _ = apps[9].activate(options: actOpts)
         default:
             super.keyDown(with: event)
         }
@@ -61,20 +62,18 @@ class TableView: NSTableView {
 class ViewController: NSViewController {
 
     @IBOutlet weak var tableView: TableView!
-    var apps_list: [[String: AnyObject]]?
+    var apps_list: [NSRunningApplication] = []
 
     // Refresh list of applications running
     func refreshAppsList() {
         let ws = NSWorkspace.shared
         // Get alphabet sorted list of running applications
-        let apps = ws.runningApplications.sorted(by: {(($0 as AnyObject).localizedName as String?)!.lowercased() < (($1 as AnyObject).localizedName as String?)!.lowercased() })
+        let apps = ws.runningApplications.sorted(by: {(($0 as NSRunningApplication).localizedName as String?)!.lowercased() < (($1 as NSRunningApplication).localizedName as String?)!.lowercased() })
         apps_list = []
-        var ind = 1
         for app in apps {
             // Would like to see only running GUI apps
             if app.activationPolicy.rawValue == 0 {
-                apps_list?.append(["Num": ind as AnyObject, "App": app])
-                ind += 1
+                apps_list.append(app)
             }
         }
     }
@@ -115,19 +114,18 @@ class ViewController: NSViewController {
 extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return apps_list?.count ?? 0
+        return apps_list.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let item = (apps_list!)[row]
+        let item = (apps_list)[row]
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as? NSTableCellView
-        let val = item[(tableColumn?.identifier.rawValue)!]!
         switch tableColumn!.identifier.rawValue {
         case "App":
-            cell?.textField?.stringValue = val.localizedName!
-            cell?.imageView?.image = val.icon
+            cell?.textField?.stringValue = (item.localizedName!)
+            cell?.imageView?.image = item.icon
         default:
-            cell?.textField?.stringValue = String(Int(truncating: val as! NSNumber))
+            cell?.textField?.stringValue = String(row + 1)
         }
         return cell
     }
