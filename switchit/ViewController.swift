@@ -9,7 +9,9 @@
 import Cocoa
 import Carbon
 
-let itemsSize = 10
+let itemsQuantityLimit = 18
+var itemsQuantity = 0
+let thisapp = NSApplication.shared
 
 class TableView: NSTableView {
     
@@ -84,30 +86,38 @@ class ViewController: NSViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        // Adjust rows coantity to the height of app window, center the window
-        print("List row height:", tableView.rowHeight)
-        print("Current view size: ", self.view.frame.size)
-        self.view.frame.size = NSSize(width: 400, height: (itemsSize * 42) + 6)
-        print("New view size: ", self.view.frame.size)
-        self.view.window?.center()
-        
         refreshAppsList()
         tableView.reloadData()
         
-        // Select the first row by default
-        tableView.selectRowIndexes([0], byExtendingSelection: true)
+        itemsQuantity = apps_list.count
+        if itemsQuantity > itemsQuantityLimit {
+            itemsQuantity = itemsQuantityLimit
+        }
+
+        // Adjust rows quantity to the height of app window, center the window
+        print("List row height:", tableView.rowHeight)
+        print("Current view size: ", self.view.frame.size)
+        self.view.frame.size = NSSize(width: 400, height: (itemsQuantity * 42) + 2)
+        print("New view size: ", self.view.frame.size)
+        self.view.window?.center()
+        print("Monitors I have: ", NSScreen.screens)
+//        print("Main app window: ", thisapp.keyWindow!)
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
+
         self.refreshAppsList()
         tableView.reloadData()
-    }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+        
+        // Select the first row by default
+        let indSet: IndexSet = [0]
+        tableView.selectRowIndexes(indSet, byExtendingSelection: false)
+        
+        view.window?.isOpaque = false
+        view.window?.backgroundColor = NSColor(red: 247 / 255.0, green: 249 / 255.0, blue: 249 / 255.0, alpha: 0.86)
+        print("Table View Opacity: ", tableView.isOpaque)
+        
     }
 }
 
@@ -121,11 +131,15 @@ extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
         let item = (apps_list)[row]
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as? NSTableCellView
         switch tableColumn!.identifier.rawValue {
+        case "Num":
+            cell?.textField?.stringValue = String(row + 1)
         case "App":
             cell?.textField?.stringValue = (item.localizedName!)
             cell?.imageView?.image = item.icon
+        case "Windows":
+            cell?.textField?.stringValue = ">"
         default:
-            cell?.textField?.stringValue = String(row + 1)
+            cell?.textField?.stringValue = "***"
         }
         return cell
     }

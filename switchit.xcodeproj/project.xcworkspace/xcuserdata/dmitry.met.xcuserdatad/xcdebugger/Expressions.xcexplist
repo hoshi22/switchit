@@ -3,6 +3,28 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in ViewController.refreshAppsList():ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.refreshAppsList():ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.globalHotKeyHandler(event:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSApplication.shared.mainWindow!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.apps_list.getter:ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "apps_list">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ViewController.tableView(_:viewFor:row:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -14,35 +36,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ViewController.globalHotKeyHandler(event:):ViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "NSApplication.shared.mainWindow!">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in ViewController.refreshAppsList():ViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.apps_list.getter:ViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "apps_list">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.refreshAppsList():ViewController.swift">
-      </ContextState>
-      <ContextState
          contextName = "ViewController.viewDidLoad():ViewController.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "self.view.frame.size">
+            </PersistentString>
             <PersistentString
                value = "currentApp.element.localizedName">
             </PersistentString>
             <PersistentString
-               value = "self.view.frame.size">
+               value = "self.view.titleVisibility">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in AppDelegate.applicationDidFinishLaunching(_:):AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "switchitApp.windows">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

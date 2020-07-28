@@ -9,6 +9,8 @@
 import Cocoa
 import Carbon
 
+let switchitApp = NSApplication.shared
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -17,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         
-        //***************** Registering global hot kay handler *******************************************************************
+        //***************** Registering global hot key handler *******************************************************************
         var gMyHotKeyID = EventHotKeyID()
         gMyHotKeyID.signature = OSType(1234)
         gMyHotKeyID.id = UInt32(48)
@@ -34,7 +36,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout.size(ofValue: EventHotKeyID.self), nil, &hkCom)
             
                 // Activate Switchit app by hotkey registered below in RegisterEventHotkey
-                NSRunningApplication.current.activate(options: [NSApplication.ActivationOptions.activateIgnoringOtherApps])
+            print("Windows: ", switchitApp.windows)
+            switchitApp.activate(ignoringOtherApps: true)
+            // NSRunningApplication.current.activate(options: [NSApplication.ActivationOptions.activateIgnoringOtherApps])
             return 12345
         }, 1, &eventType, nil, nil)
         
@@ -60,7 +64,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 class SwitchitWindow: NSWindow {
+    
+    override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing bufferingType: NSWindow.BackingStoreType, defer flag: Bool) {
+        super.init(contentRect: contentRect, styleMask: style, backing: bufferingType, defer: flag)
+
+        // Set the opaque value off,remove shadows and fill the window with clear (transparent)
+        switchitApp.keyWindow?.isOpaque = false
+        switchitApp.keyWindow?.hasShadow = true
+        switchitApp.keyWindow?.backgroundColor = NSColor.clear
+
+        // Change the title bar appereance
+        self.title = "My Custom Title"
+        self.titleVisibility = .hidden
+        self.titlebarAppearsTransparent = true
+    }
+    
     override var canBecomeKey: Bool {
         get { return true }
     }
+    
 }
