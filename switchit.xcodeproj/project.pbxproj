@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB0BC11823C7751C0079F370 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0BC11723C7751C0079F370 /* WindowController.swift */; };
 		CBA978DF22678BB000AC8601 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA978DE22678BB000AC8601 /* AppDelegate.swift */; };
 		CBA978E122678BB000AC8601 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA978E022678BB000AC8601 /* ViewController.swift */; };
 		CBA978E322678BB100AC8601 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBA978E222678BB100AC8601 /* Assets.xcassets */; };
@@ -34,7 +33,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CB0BC11723C7751C0079F370 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		CB50C26E23DB08C400EEB4DB /* switchit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "switchit-Bridging-Header.h"; sourceTree = "<group>"; };
 		CBA978DB22678BB000AC8601 /* switchit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = switchit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA978DE22678BB000AC8601 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 			children = (
 				CBA978DE22678BB000AC8601 /* AppDelegate.swift */,
 				CBA978E022678BB000AC8601 /* ViewController.swift */,
-				CB0BC11723C7751C0079F370 /* WindowController.swift */,
 				CBA978E222678BB100AC8601 /* Assets.xcassets */,
 				CBA978E422678BB100AC8601 /* Main.storyboard */,
 				CBA978E722678BB100AC8601 /* Info.plist */,
@@ -261,7 +258,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBA978E122678BB000AC8601 /* ViewController.swift in Sources */,
-				CB0BC11823C7751C0079F370 /* WindowController.swift in Sources */,
 				CBA978DF22678BB000AC8601 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

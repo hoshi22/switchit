@@ -9,7 +9,7 @@
 import Cocoa
 import Carbon
 
-let itemsQuantityLimit = 18
+let itemsQuantityLimit = 14
 var itemsQuantity = 0
 let thisapp = NSApplication.shared
 
@@ -71,13 +71,29 @@ class ViewController: NSViewController {
         let ws = NSWorkspace.shared
         // Get alphabet sorted list of running applications
         let apps = ws.runningApplications.sorted(by: {(($0 as NSRunningApplication).localizedName as String?)!.lowercased() < (($1 as NSRunningApplication).localizedName as String?)!.lowercased() })
-        apps_list = []
+        self.apps_list = []
         for app in apps {
             // Would like to see only running GUI apps
             if app.activationPolicy.rawValue == 0 {
-                apps_list.append(app)
+                self.apps_list.append(app)
             }
         }
+        
+    }
+    
+    func repaintListWindow() {
+        itemsQuantity = self.apps_list.count
+        if itemsQuantity > itemsQuantityLimit {
+            itemsQuantity = itemsQuantityLimit
+        }
+        
+        // Setting semi-transparent background and window size
+        self.view.window?.isOpaque = false
+        self.view.window?.backgroundColor = NSColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: 0.86)
+        self.view.window?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (itemsQuantity * 42) + 2), display: true)
+        
+        self.view.window?.layoutIfNeeded()
+        self.view.window?.center()
     }
     
     override func viewDidLoad() {
@@ -86,37 +102,37 @@ class ViewController: NSViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        refreshAppsList()
+        self.refreshAppsList()
         tableView.reloadData()
         
-        itemsQuantity = apps_list.count
-        if itemsQuantity > itemsQuantityLimit {
-            itemsQuantity = itemsQuantityLimit
-        }
-
-        // Adjust rows quantity to the height of app window, center the window
-        print("List row height:", tableView.rowHeight)
-        print("Current view size: ", self.view.frame.size)
-        self.view.frame.size = NSSize(width: 400, height: (itemsQuantity * 42) + 2)
-        print("New view size: ", self.view.frame.size)
-        self.view.window?.center()
-        print("Monitors I have: ", NSScreen.screens)
-//        print("Main app window: ", thisapp.keyWindow!)
+        self.repaintListWindow()
+        
+//        itemsQuantity = apps_list.count
+//        if itemsQuantity > itemsQuantityLimit {
+//            itemsQuantity = itemsQuantityLimit
+//        }
+//
+//        // Adjust rows quantity to the height of app window, center the window
+//        print("Items quantity: ", itemsQuantity)
+//        print("List row height:", tableView.rowHeight)
+//        print("Current view size: ", self.view.frame.size)
+//        self.view.frame.size = NSSize(width: 400, height: (itemsQuantity * 42) + 2)
+//        print("New view size: ", self.view.frame.size)
+//        self.view.window?.center()
+//        print("Monitors I have: ", NSScreen.screens)
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
-
+        print("viewWillAppear")
         self.refreshAppsList()
         tableView.reloadData()
+        self.repaintListWindow()
         
         // Select the first row by default
         let indSet: IndexSet = [0]
         tableView.selectRowIndexes(indSet, byExtendingSelection: false)
         
-        view.window?.isOpaque = false
-        view.window?.backgroundColor = NSColor(red: 247 / 255.0, green: 249 / 255.0, blue: 249 / 255.0, alpha: 0.86)
-        print("Table View Opacity: ", tableView.isOpaque)
         
     }
 }
@@ -124,11 +140,11 @@ class ViewController: NSViewController {
 extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return apps_list.count
+        return self.apps_list.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let item = (apps_list)[row]
+        let item = (self.apps_list)[row]
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as? NSTableCellView
         switch tableColumn!.identifier.rawValue {
         case "Num":

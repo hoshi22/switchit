@@ -68,11 +68,6 @@ class SwitchitWindow: NSWindow {
     override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing bufferingType: NSWindow.BackingStoreType, defer flag: Bool) {
         super.init(contentRect: contentRect, styleMask: style, backing: bufferingType, defer: flag)
 
-        // Set the opaque value off,remove shadows and fill the window with clear (transparent)
-        switchitApp.keyWindow?.isOpaque = false
-        switchitApp.keyWindow?.hasShadow = true
-        switchitApp.keyWindow?.backgroundColor = NSColor.clear
-
         // Change the title bar appereance
         self.title = "My Custom Title"
         self.titleVisibility = .hidden
