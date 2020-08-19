@@ -12,8 +12,19 @@ import Carbon
 let itemsQuantityLimit = 14
 var itemsQuantity = 0
 let thisapp = NSApplication.shared
+var lastUsed = [0]
 
 class TableView: NSTableView {
+    
+    func updateHistory(pos: Int = -1) {
+        if lastUsed.count < 2 {
+            lastUsed.append(self.selectedRow)
+        }
+        else {
+                lastUsed[0] = lastUsed[1]
+                lastUsed[1] = (pos == -1 ? self.selectedRow : pos)
+        }
+    }
     
     override func keyDown(with event: NSEvent) {
         let viewController = NSApplication.shared.keyWindow!.contentViewController as! ViewController
@@ -25,36 +36,49 @@ class TableView: NSTableView {
         case 36:
             NSRunningApplication.current.hide()
             _ = apps[self.selectedRow].activate(options: actOpts)
+            self.updateHistory()
         case 18:
             NSRunningApplication.current.hide()
             _ = apps[0].activate(options: actOpts)
+            self.updateHistory(pos: 0)
         case 19:
             NSRunningApplication.current.hide()
             _ = apps[1].activate(options: actOpts)
+            self.updateHistory(pos: 1)
         case 20:
             NSRunningApplication.current.hide()
             _ = apps[2].activate(options: actOpts)
+            self.updateHistory(pos: 2)
         case 21:
             NSRunningApplication.current.hide()
             _ = apps[3].activate(options: actOpts)
+            self.updateHistory(pos: 3)
         case 23:
             NSRunningApplication.current.hide()
             _ = apps[4].activate(options: actOpts)
+            self.updateHistory(pos: 4)
         case 22:
             NSRunningApplication.current.hide()
             _ = apps[5].activate(options: actOpts)
+            self.updateHistory(pos: 5)
         case 26:
             NSRunningApplication.current.hide()
             _ = apps[6].activate(options: actOpts)
+            self.updateHistory(pos: 6)
         case 28:
             NSRunningApplication.current.hide()
             _ = apps[7].activate(options: actOpts)
+            self.updateHistory(pos: 7)
         case 25:
             NSRunningApplication.current.hide()
             _ = apps[8].activate(options: actOpts)
+            self.updateHistory(pos: 8)
         case 29:
             NSRunningApplication.current.hide()
             _ = apps[9].activate(options: actOpts)
+            self.updateHistory(pos: 9)
+        case 53:
+            NSRunningApplication.current.hide()
         default:
             super.keyDown(with: event)
         }
@@ -86,54 +110,34 @@ class ViewController: NSViewController {
         if itemsQuantity > itemsQuantityLimit {
             itemsQuantity = itemsQuantityLimit
         }
-        
         // Setting semi-transparent background and window size
         self.view.window?.isOpaque = false
         self.view.window?.backgroundColor = NSColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: 0.86)
         self.view.window?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (itemsQuantity * 42) + 2), display: true)
-        
         self.view.window?.layoutIfNeeded()
         self.view.window?.center()
+        print("Repaint")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
-
         self.refreshAppsList()
         tableView.reloadData()
-        
         self.repaintListWindow()
-        
-//        itemsQuantity = apps_list.count
-//        if itemsQuantity > itemsQuantityLimit {
-//            itemsQuantity = itemsQuantityLimit
-//        }
-//
-//        // Adjust rows quantity to the height of app window, center the window
-//        print("Items quantity: ", itemsQuantity)
-//        print("List row height:", tableView.rowHeight)
-//        print("Current view size: ", self.view.frame.size)
-//        self.view.frame.size = NSSize(width: 400, height: (itemsQuantity * 42) + 2)
-//        print("New view size: ", self.view.frame.size)
-//        self.view.window?.center()
-//        print("Monitors I have: ", NSScreen.screens)
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        print("viewWillAppear")
         self.refreshAppsList()
         tableView.reloadData()
         self.repaintListWindow()
         
-        // Select the first row by default
-        let indSet: IndexSet = [0]
-        tableView.selectRowIndexes(indSet, byExtendingSelection: false)
-        
-        
+        // Select the previously used app
+        print("Zashli")
+        print(lastUsed)
+        tableView.selectRowIndexes([lastUsed[0]], byExtendingSelection: false)
     }
 }
 

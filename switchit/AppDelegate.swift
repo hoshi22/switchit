@@ -35,10 +35,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             var hkCom = EventHotKeyID()
             GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout.size(ofValue: EventHotKeyID.self), nil, &hkCom)
             
-                // Activate Switchit app by hotkey registered below in RegisterEventHotkey
-            print("Windows: ", switchitApp.windows)
+            // Activate Switchit app by hotkey registered below in RegisterEventHotkey
+//            print("Windows: ", switchitApp.windows)
             switchitApp.activate(ignoringOtherApps: true)
-            // NSRunningApplication.current.activate(options: [NSApplication.ActivationOptions.activateIgnoringOtherApps])
             return 12345
         }, 1, &eventType, nil, nil)
         
