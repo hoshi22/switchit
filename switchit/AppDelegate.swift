@@ -64,17 +64,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 class SwitchitWindow: NSWindow {
     
-    override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing bufferingType: NSWindow.BackingStoreType, defer flag: Bool) {
-        super.init(contentRect: contentRect, styleMask: style, backing: bufferingType, defer: flag)
-
-        // Change the title bar appereance
-        self.title = "My Custom Title"
-        self.titleVisibility = .hidden
-        self.titlebarAppearsTransparent = true
-    }
+//    override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing bufferingType: NSWindow.BackingStoreType, defer flag: Bool) {
+//        super.init(contentRect: contentRect, styleMask: style, backing: bufferingType, defer: flag)
+//
+//        // Change the title bar appereance
+//        self.title = "My Custom Title"
+////        self.titleVisibility = .hidden
+////        self.titlebarAppearsTransparent = true
+//    }
     
-    override var canBecomeKey: Bool {
-        get { return true }
-    }
+//    override var canBecomeKey: Bool {
+//        get { return true }
+//    }
     
 }

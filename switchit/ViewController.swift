@@ -68,6 +68,8 @@ class TableView: NSTableView {
             else {
                 _ = apps[self.selectedRow].activate(options: actOpts)
                 self.updateHistory()
+                print("Enter pressed")
+                NSApp.hide(self)
             }
         }
     }
