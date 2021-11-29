@@ -56,7 +56,10 @@ class TableView: NSTableView {
             currpos = 8
         case 29:
             currpos = 9
+        case 53: // "esc" pressed
+            NSApp.hide(self)
         default:
+            print("Key pressed, code is: ", kCode)
             super.keyDown(with: event)
         }
         if currpos != nil {

@@ -706,18 +706,18 @@
             <objects>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="ViewController" customModule="switchit" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="481" height="269"/>
+                    <view key="view" autoresizesSubviews="NO" misplaced="YES" id="m2S-Jp-Qdl">
+                        <rect key="frame" x="0.0" y="0.0" width="490" height="269"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBP-U3-8SS">
-                                <rect key="frame" x="0.0" y="0.0" width="485" height="269"/>
+                                <rect key="frame" x="0.0" y="0.0" width="492" height="269"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Ns9-0A-Oy9">
-                                    <rect key="frame" x="0.0" y="0.0" width="485" height="269"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="492" height="269"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" viewBased="YES" id="LeW-k4-SCa" customClass="TableView" customModule="switchit" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="485" height="269"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="492" height="269"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -833,7 +833,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-621" y="725.5"/>
+            <point key="canvasLocation" x="-617" y="725.5"/>
         </scene>
     </scenes>
     <resources>
