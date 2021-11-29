@@ -9,7 +9,7 @@
 import Cocoa
 import Carbon
 
-let itemsQuantityLimit = 14
+let itemsQuantityLimit = 18
 var itemsQuantity = 0
 let thisapp = NSApplication.shared
 var lastUsed = [0]
@@ -32,55 +32,43 @@ class TableView: NSTableView {
         let kCode = event.keyCode
         let actOpts: NSApplication.ActivationOptions = [.activateAllWindows, .activateIgnoringOtherApps]
         
+        var currpos: Int? = nil
         switch kCode {
         case 36:
-            NSRunningApplication.current.hide()
-            _ = apps[self.selectedRow].activate(options: actOpts)
-            self.updateHistory()
+            currpos = -1
         case 18:
-            NSRunningApplication.current.hide()
-            _ = apps[0].activate(options: actOpts)
-            self.updateHistory(pos: 0)
+            currpos = 0
         case 19:
-            NSRunningApplication.current.hide()
-            _ = apps[1].activate(options: actOpts)
-            self.updateHistory(pos: 1)
+            currpos = 1
         case 20:
-            NSRunningApplication.current.hide()
-            _ = apps[2].activate(options: actOpts)
-            self.updateHistory(pos: 2)
+            currpos = 2
         case 21:
-            NSRunningApplication.current.hide()
-            _ = apps[3].activate(options: actOpts)
-            self.updateHistory(pos: 3)
+            currpos = 3
         case 23:
-            NSRunningApplication.current.hide()
-            _ = apps[4].activate(options: actOpts)
-            self.updateHistory(pos: 4)
+            currpos = 4
         case 22:
-            NSRunningApplication.current.hide()
-            _ = apps[5].activate(options: actOpts)
-            self.updateHistory(pos: 5)
+            currpos = 5
         case 26:
-            NSRunningApplication.current.hide()
-            _ = apps[6].activate(options: actOpts)
-            self.updateHistory(pos: 6)
+            currpos = 6
         case 28:
-            NSRunningApplication.current.hide()
-            _ = apps[7].activate(options: actOpts)
-            self.updateHistory(pos: 7)
+            currpos = 7
         case 25:
-            NSRunningApplication.current.hide()
-            _ = apps[8].activate(options: actOpts)
-            self.updateHistory(pos: 8)
+            currpos = 8
         case 29:
-            NSRunningApplication.current.hide()
-            _ = apps[9].activate(options: actOpts)
-            self.updateHistory(pos: 9)
-        case 53:
-            NSRunningApplication.current.hide()
+            currpos = 9
         default:
             super.keyDown(with: event)
+        }
+        if currpos != nil {
+            NSRunningApplication.current.hide()
+            if currpos! > 0 {
+                _ = apps[currpos!].activate(options: actOpts)
+                self.updateHistory(pos: currpos!)
+            }
+            else {
+                _ = apps[self.selectedRow].activate(options: actOpts)
+                self.updateHistory()
+            }
         }
     }
 }
@@ -126,6 +114,7 @@ class ViewController: NSViewController {
         self.refreshAppsList()
         tableView.reloadData()
         self.repaintListWindow()
+        NSApp.setActivationPolicy(.accessory)
     }
     
     override func viewWillAppear() {
