@@ -9,8 +9,14 @@
 import Cocoa
 import Carbon
 
-let itemsQuantityLimit = 18
-var itemsQuantity = 0
+// **** Settings which is needs to be defined in settings UI
+let initialListSize = 12
+let iconSize = 32
+let rowHeight = iconSize + 20
+let transparencyLvl = 0.90
+// ****
+
+var itemsQuantity = 12
 let thisapp = NSApplication.shared
 var lastUsed = [0]
 
@@ -34,44 +40,53 @@ class TableView: NSTableView {
         
         var currpos: Int? = nil
         switch kCode {
-        case 36:
+        case 36: // Enter
             currpos = -1
-        case 18:
+            NSApp.hide(self)
+        case 29, 82: // 0
             currpos = 0
-        case 19:
+            NSApp.hide(self)
+        case 18, 83: // 1
             currpos = 1
-        case 20:
+            NSApp.hide(self)
+        case 19, 84: // 2
             currpos = 2
-        case 21:
+            NSApp.hide(self)
+        case 20, 85: // 3
             currpos = 3
-        case 23:
+            NSApp.hide(self)
+        case 21, 86: // 4
             currpos = 4
-        case 22:
+            NSApp.hide(self)
+        case 23, 87: // 5
             currpos = 5
-        case 26:
+            NSApp.hide(self)
+        case 22, 88: // 6
             currpos = 6
-        case 28:
+            NSApp.hide(self)
+        case 26, 89: // 7
             currpos = 7
-        case 25:
-            currpos = 8
-        case 29:
+            NSApp.hide(self)
+        case 28, 91: // 8
+             currpos = 8
+            NSApp.hide(self)
+        case 25, 92: // 9
             currpos = 9
+            NSApp.hide(self)
         case 53: // "esc" pressed
             NSApp.hide(self)
         default:
-            print("Key pressed, code is: ", kCode)
             super.keyDown(with: event)
         }
         if currpos != nil {
             NSRunningApplication.current.hide()
-            if currpos! > 0 {
+            if currpos! >= 0 {
                 _ = apps[currpos!].activate(options: actOpts)
                 self.updateHistory(pos: currpos!)
             }
             else {
                 _ = apps[self.selectedRow].activate(options: actOpts)
                 self.updateHistory()
-                print("Enter pressed")
                 NSApp.hide(self)
             }
         }
@@ -99,23 +114,22 @@ class ViewController: NSViewController {
     }
     
     func repaintListWindow() {
-        itemsQuantity = self.apps_list.count
-        if itemsQuantity > itemsQuantityLimit {
-            itemsQuantity = itemsQuantityLimit
-        }
         // Setting semi-transparent background and window size
+//        self.view.layer?.borderColor = CGColor( red: 153/255, green: 153/255, blue:0/255, alpha: transparencyLvl )
+//        self.view.layer?.borderWidth = 10
         self.view.window?.isOpaque = false
-        self.view.window?.backgroundColor = NSColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: 0.86)
-        self.view.window?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (itemsQuantity * 42) + 2), display: true)
+        self.view.window?.backgroundColor = NSColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: transparencyLvl)
+        let toSize = tableView.numberOfRows >= initialListSize ? initialListSize : tableView.numberOfRows
+        self.view.window?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + 60), display: true)
         self.view.window?.layoutIfNeeded()
         self.view.window?.center()
-        print("Repaint")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = CGFloat(rowHeight)
         self.refreshAppsList()
         tableView.reloadData()
         self.repaintListWindow()
@@ -129,8 +143,6 @@ class ViewController: NSViewController {
         self.repaintListWindow()
         
         // Select the previously used app
-        print("Zashli")
-        print(lastUsed)
         tableView.selectRowIndexes([lastUsed[0]], byExtendingSelection: false)
     }
 }
@@ -146,9 +158,17 @@ extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as? NSTableCellView
         switch tableColumn!.identifier.rawValue {
         case "Num":
-            cell?.textField?.stringValue = String(row + 1)
+            if row < 10 {
+                cell?.textField?.stringValue = String(row)
+                cell?.textField?.isBezeled = true
+            }
+            else {
+                cell?.textField?.stringValue = ""
+                cell?.textField?.isBezeled = false
+            }
         case "App":
             cell?.textField?.stringValue = (item.localizedName!)
+            item.icon?.size = NSSize(width: iconSize, height: iconSize)
             cell?.imageView?.image = item.icon
         case "Windows":
             cell?.textField?.stringValue = ">"

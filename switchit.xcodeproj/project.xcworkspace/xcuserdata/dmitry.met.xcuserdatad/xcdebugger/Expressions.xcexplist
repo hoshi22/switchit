@@ -3,6 +3,9 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "TableView.keyDown(with:):ViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in ViewController.refreshAppsList():ViewController.swift">
       </ContextState>
       <ContextState
@@ -39,13 +42,13 @@
          contextName = "ViewController.viewDidLoad():ViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "self.view.titleVisibility">
+            </PersistentString>
+            <PersistentString
                value = "self.view.frame.size">
             </PersistentString>
             <PersistentString
                value = "currentApp.element.localizedName">
-            </PersistentString>
-            <PersistentString
-               value = "self.view.titleVisibility">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

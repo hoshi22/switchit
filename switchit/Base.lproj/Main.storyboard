@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -706,18 +706,18 @@
             <objects>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="ViewController" customModule="switchit" sceneMemberID="viewController">
-                    <view key="view" autoresizesSubviews="NO" misplaced="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="490" height="269"/>
+                    <view key="view" autoresizesSubviews="NO" appearanceType="aqua" misplaced="YES" id="m2S-Jp-Qdl">
+                        <rect key="frame" x="0.0" y="0.0" width="490" height="268"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBP-U3-8SS">
-                                <rect key="frame" x="0.0" y="0.0" width="492" height="269"/>
+                                <rect key="frame" x="0.0" y="0.0" width="490" height="252"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Ns9-0A-Oy9">
-                                    <rect key="frame" x="0.0" y="0.0" width="492" height="269"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="490" height="252"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" viewBased="YES" id="LeW-k4-SCa" customClass="TableView" customModule="switchit" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="492" height="269"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="490" height="252"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -740,9 +740,9 @@
                                                             <rect key="frame" x="11" y="1" width="45" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ujp-Mi-dpZ">
-                                                                    <rect key="frame" x="3" y="0.0" width="40" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Table View Cell" usesSingleLineMode="YES" id="1vT-5f-Oww">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ujp-Mi-dpZ">
+                                                                    <rect key="frame" x="-37" y="-2" width="119" height="22"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" title="Table View Cell" usesSingleLineMode="YES" bezelStyle="round" id="1vT-5f-Oww">
                                                                         <font key="font" metaFont="menu" size="14"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -750,9 +750,8 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="Ujp-Mi-dpZ" firstAttribute="centerX" secondItem="Ksx-QS-n6l" secondAttribute="centerX" id="54W-KW-jje"/>
-                                                                <constraint firstItem="Ujp-Mi-dpZ" firstAttribute="centerY" secondItem="Ksx-QS-n6l" secondAttribute="centerY" id="Q0X-eh-aMx"/>
-                                                                <constraint firstItem="Ujp-Mi-dpZ" firstAttribute="leading" secondItem="Ksx-QS-n6l" secondAttribute="leading" constant="5" id="dHk-dJ-eN4"/>
+                                                                <constraint firstItem="Ujp-Mi-dpZ" firstAttribute="centerY" secondItem="Ksx-QS-n6l" secondAttribute="centerY" id="2jP-8t-pid"/>
+                                                                <constraint firstItem="Ujp-Mi-dpZ" firstAttribute="centerX" secondItem="Ksx-QS-n6l" secondAttribute="centerX" id="TqP-7s-2N3"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="Ujp-Mi-dpZ" id="PKb-KX-TnP"/>
@@ -776,15 +775,12 @@
                                                             <rect key="frame" x="59" y="1" width="242" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KSx-AV-D7W">
-                                                                    <rect key="frame" x="12" y="-3" width="15" height="23"/>
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KSx-AV-D7W">
+                                                                    <rect key="frame" x="0.0" y="1" width="15" height="15"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="wmS-zy-Kkq"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Omd-eq-pBU">
-                                                                    <rect key="frame" x="40" y="0.0" width="102" height="17"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="49" id="Eei-iN-7rQ"/>
-                                                                    </constraints>
+                                                                    <rect key="frame" x="21" y="0.0" width="223" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="If3-J3-doi">
                                                                         <font key="font" metaFont="menu" size="14"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -793,12 +789,12 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="Omd-eq-pBU" firstAttribute="centerY" secondItem="iwv-kK-G4B" secondAttribute="centerY" id="DYc-E7-DqV"/>
-                                                                <constraint firstAttribute="trailing" secondItem="Omd-eq-pBU" secondAttribute="trailing" constant="102" id="Iiq-dX-D8c"/>
-                                                                <constraint firstItem="Omd-eq-pBU" firstAttribute="centerY" secondItem="KSx-AV-D7W" secondAttribute="centerY" id="etg-lG-fPj"/>
-                                                                <constraint firstItem="Omd-eq-pBU" firstAttribute="bottom" secondItem="KSx-AV-D7W" secondAttribute="bottom" id="ia1-Oe-vE1"/>
-                                                                <constraint firstItem="Omd-eq-pBU" firstAttribute="leading" secondItem="iwv-kK-G4B" secondAttribute="leading" constant="42" id="wKZ-J1-7dQ"/>
-                                                                <constraint firstItem="Omd-eq-pBU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KSx-AV-D7W" secondAttribute="trailing" constant="8" symbolic="YES" id="zXa-7U-hT1"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Omd-eq-pBU" secondAttribute="trailing" constant="4" id="0OY-vQ-dW7"/>
+                                                                <constraint firstItem="KSx-AV-D7W" firstAttribute="leading" secondItem="iwv-kK-G4B" secondAttribute="leading" id="Epv-lb-oGQ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Omd-eq-pBU" secondAttribute="trailing" id="INQ-uh-YxN"/>
+                                                                <constraint firstItem="KSx-AV-D7W" firstAttribute="centerY" secondItem="iwv-kK-G4B" secondAttribute="centerY" id="Qkd-CF-Cz6"/>
+                                                                <constraint firstItem="Omd-eq-pBU" firstAttribute="centerY" secondItem="iwv-kK-G4B" secondAttribute="centerY" id="uPC-lG-KMI"/>
+                                                                <constraint firstItem="Omd-eq-pBU" firstAttribute="leading" secondItem="KSx-AV-D7W" secondAttribute="trailing" constant="8" id="zf3-1R-p5r"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="imageView" destination="KSx-AV-D7W" id="bnS-FL-lmS"/>
