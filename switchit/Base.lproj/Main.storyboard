@@ -686,8 +686,9 @@
             <objects>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" identifier="switchitWindow" title="Switch It" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA" customClass="SwitchitWindow" customModule="switchit" customModuleProvider="target">
-                        <windowStyleMask key="styleMask" titled="YES" fullSizeContentView="YES"/>
+                    <window key="window" identifier="switchitWindow" title="Switch It" separatorStyle="shadow" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" animationBehavior="default" tabbingMode="disallowed" toolbarStyle="expanded" id="IQv-IB-iLA" customClass="SwitchitWindow" customModule="switchit" customModuleProvider="target">
+                        <windowStyleMask key="styleMask" titled="YES" texturedBackground="YES"/>
+                        <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
                         <rect key="contentRect" x="196" y="240" width="400" height="280"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
@@ -707,17 +708,17 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="ViewController" customModule="switchit" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" appearanceType="aqua" misplaced="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="490" height="268"/>
+                        <rect key="frame" x="0.0" y="0.0" width="490" height="239"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBP-U3-8SS">
-                                <rect key="frame" x="0.0" y="0.0" width="490" height="252"/>
+                                <rect key="frame" x="0.0" y="0.0" width="490" height="235"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Ns9-0A-Oy9">
-                                    <rect key="frame" x="0.0" y="0.0" width="490" height="252"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="490" height="235"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" viewBased="YES" id="LeW-k4-SCa" customClass="TableView" customModule="switchit" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="490" height="252"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="490" height="235"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -780,7 +781,7 @@
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="wmS-zy-Kkq"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Omd-eq-pBU">
-                                                                    <rect key="frame" x="21" y="0.0" width="223" height="17"/>
+                                                                    <rect key="frame" x="21" y="0.0" width="219" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="If3-J3-doi">
                                                                         <font key="font" metaFont="menu" size="14"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -791,7 +792,6 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="Omd-eq-pBU" secondAttribute="trailing" constant="4" id="0OY-vQ-dW7"/>
                                                                 <constraint firstItem="KSx-AV-D7W" firstAttribute="leading" secondItem="iwv-kK-G4B" secondAttribute="leading" id="Epv-lb-oGQ"/>
-                                                                <constraint firstAttribute="trailing" secondItem="Omd-eq-pBU" secondAttribute="trailing" id="INQ-uh-YxN"/>
                                                                 <constraint firstItem="KSx-AV-D7W" firstAttribute="centerY" secondItem="iwv-kK-G4B" secondAttribute="centerY" id="Qkd-CF-Cz6"/>
                                                                 <constraint firstItem="Omd-eq-pBU" firstAttribute="centerY" secondItem="iwv-kK-G4B" secondAttribute="centerY" id="uPC-lG-KMI"/>
                                                                 <constraint firstItem="Omd-eq-pBU" firstAttribute="leading" secondItem="KSx-AV-D7W" secondAttribute="trailing" constant="8" id="zf3-1R-p5r"/>

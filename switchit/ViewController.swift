@@ -110,13 +110,11 @@ class ViewController: NSViewController {
                 self.apps_list.append(app)
             }
         }
-        
+	
     }
     
     func repaintListWindow() {
         // Setting semi-transparent background and window size
-//        self.view.layer?.borderColor = CGColor( red: 153/255, green: 153/255, blue:0/255, alpha: transparencyLvl )
-//        self.view.layer?.borderWidth = 10
         self.view.window?.isOpaque = false
         self.view.window?.backgroundColor = NSColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: transparencyLvl)
         let toSize = tableView.numberOfRows >= initialListSize ? initialListSize : tableView.numberOfRows

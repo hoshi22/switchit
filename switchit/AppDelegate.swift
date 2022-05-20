@@ -43,6 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         _ = RegisterEventHotKey(48, UInt32(optionKey), gMyHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef)
         //************************************************************************************
         
+        // Dock icon stuff
         if let button = statusItem.button {
             button.image = NSImage(named:NSImage.Name("switchit-dock-icon"))
             button.action = #selector(printQuote(_:))
