@@ -1,6 +1,6 @@
 # switchit
-This is the alternative for MacOS Cmd+Tab task switcher. Switchit app activates on Opt+Tab hotkey, and shows the list of running apps.
-You can use arrows keys to navigate to app to switch, and then activate it by Enter key. Next activation of switchit app will highlight previously chosen app by default.
+This is the alternative for MacOS `Cmd+Tab` task switcher. Switchit app activates on `Opt+Tab` hotkey, and shows the list of running apps.
+You can use arrows keys to navigate to app to switch, and then activate it by `Enter` key. Next activation of switchit app will highlight previously chosen app by default.
 You can also use numeric keys for first 10 apps to choose.
 
 Screenshot of **switchit** app
