@@ -117,9 +117,17 @@ class ViewController: NSViewController {
         // Setting semi-transparent background and window size
         self.view.window?.isOpaque = false
         self.view.window?.backgroundColor = NSColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: transparencyLvl)
+        
         let toSize = tableView.numberOfRows >= initialListSize ? initialListSize : tableView.numberOfRows
         self.view.window?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + 60), display: true)
-        self.view.window?.layoutIfNeeded()
+        
+//        self.view.window?.standardWindowButton(.closeButton)?.isHidden = true
+//        self.view.window?.standardWindowButton(.zoomButton)?.isHidden = true
+//        self.view.window?.standardWindowButton(.miniaturizeButton)?.isHidden = true
+//        self.view.window?.titleVisibility = .hidden
+//        self.view.window?.titlebarAppearsTransparent = true
+        self.view.window?.styleMask = .hudWindow
+        
         self.view.window?.center()
     }
     
