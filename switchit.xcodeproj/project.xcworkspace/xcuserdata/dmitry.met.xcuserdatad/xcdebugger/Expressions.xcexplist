@@ -6,10 +6,26 @@
          contextName = "TableView.keyDown(with:):ViewController.swift">
       </ContextState>
       <ContextState
+         contextName = "SettingsPopupController.viewDidLoad():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "userSettings">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in ViewController.refreshAppsList():ViewController.swift">
       </ContextState>
       <ContextState
          contextName = "ViewController.refreshAppsList():ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static SwitchitSettingsViewController.settingsController():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "identifier">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "ViewController.globalHotKeyHandler(event:):ViewController.swift">
@@ -31,10 +47,10 @@
          contextName = "ViewController.tableView(_:viewFor:row:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "String(Int(val))">
+               value = "userSettings.object(forKey: &quot;IconsSize&quot;)">
             </PersistentString>
             <PersistentString
-               value = "tableColumn!.identifier.rawValue">
+               value = "iconsSize">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -49,6 +65,14 @@
             </PersistentString>
             <PersistentString
                value = "currentApp.element.localizedName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AppDelegate.showPopover(sender:):AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "popover">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

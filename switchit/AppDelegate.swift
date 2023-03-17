@@ -15,6 +15,8 @@ let switchitApp = NSApplication.shared
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    let popover = NSPopover()
+    var eventMonitor: EventMonitor?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -33,7 +35,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         InstallEventHandler(GetApplicationEventTarget(), {(nextHanlder, theEvent, userData) -> OSStatus in
             var hkCom = EventHotKeyID()
             GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout.size(ofValue: EventHotKeyID.self), nil, &hkCom)
-            
             // Activate Switchit app by hotkey registered below in RegisterEventHotkey
             switchitApp.activate(ignoringOtherApps: true)
             return 12345
@@ -46,17 +47,43 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Dock icon stuff
         if let button = statusItem.button {
             button.image = NSImage(named:NSImage.Name("switchit-dock-icon"))
-            button.action = #selector(printQuote(_:))
+            button.action = #selector(togglePopover(_:))
         }
+        popover.contentViewController = SettingsPopupController.showSettingsWindow()
+        
+        // To close popover if user click outside it
+        eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
+          if let strongSelf = self, strongSelf.popover.isShown {
+              strongSelf.closePopover(sender: event)
+              switchitApp.activate(ignoringOtherApps: true)
+          }
+        }
+
     }
     
-    @objc func printQuote(_ sender: Any?) {
-        let quoteText = "Never put off until tomorrow what you can do the day after tomorrow."
-        let quoteAuthor = "Mark Twain"
-        print("\(quoteText) — \(quoteAuthor)")
+    @objc func togglePopover(_ sender: Any?) {
+      if popover.isShown {
+        closePopover(sender: sender)
+      } else {
+        showPopover(sender: sender)
+      }
+    }
+
+    func showPopover(sender: Any?) {
+      if let button = statusItem.button {
+          popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+          eventMonitor?.start()
+      }
+    }
+
+    func closePopover(sender: Any?) {
+        popover.performClose(sender)
+//        popover.close()
+        eventMonitor?.stop()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
+   
 }

@@ -11,14 +11,18 @@ import Carbon
 
 // **** Settings which is needs to be defined in settings UI
 let initialListSize = 12
-let iconSize = 32
-let rowHeight = iconSize + 20
+let defaultIconsSize = 32
+let rowHeight = defaultIconsSize + 20
 let transparencyLvl = 0.90
 // ****
 
 var itemsQuantity = 12
 let thisapp = NSApplication.shared
 var lastUsed = [0]
+
+let userSettings = UserDefaults.standard
+
+let appDelegate = NSApplication.shared.delegate as! AppDelegate
 
 class TableView: NSTableView {
     
@@ -120,14 +124,7 @@ class ViewController: NSViewController {
         
         let toSize = tableView.numberOfRows >= initialListSize ? initialListSize : tableView.numberOfRows
         self.view.window?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + 60), display: true)
-        
-//        self.view.window?.standardWindowButton(.closeButton)?.isHidden = true
-//        self.view.window?.standardWindowButton(.zoomButton)?.isHidden = true
-//        self.view.window?.standardWindowButton(.miniaturizeButton)?.isHidden = true
-//        self.view.window?.titleVisibility = .hidden
-//        self.view.window?.titlebarAppearsTransparent = true
         self.view.window?.styleMask = .hudWindow
-        
         self.view.window?.center()
     }
     
@@ -162,6 +159,7 @@ extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let item = (self.apps_list)[row]
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as? NSTableCellView
+        let iconsSize = userSettings.object(forKey: "IconsSize") as? Int ?? defaultIconsSize
         switch tableColumn!.identifier.rawValue {
         case "Num":
             if row < 10 {
@@ -174,7 +172,7 @@ extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
             }
         case "App":
             cell?.textField?.stringValue = (item.localizedName!)
-            item.icon?.size = NSSize(width: iconSize, height: iconSize)
+            item.icon?.size = NSSize(width: iconsSize, height: iconsSize)
             cell?.imageView?.image = item.icon
         case "Windows":
             cell?.textField?.stringValue = ">"
@@ -184,3 +182,42 @@ extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
         return cell
     }
 }
+
+class SettingsPopupController: NSViewController {
+    
+    @IBOutlet weak var settingsIconsSize: NSPopUpButton!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        settingsIconsSize.removeAllItems()
+        settingsIconsSize.addItems(withTitles: ["24", "32", "40", "48"])
+        let userIconsSize = userSettings.object(forKey: "IconsSize") as? String
+        settingsIconsSize.selectItem(withTitle: userIconsSize ?? String(defaultIconsSize))
+    }
+    
+}
+	
+extension SettingsPopupController {
+    
+    static func showSettingsWindow() -> SettingsPopupController {
+        let mainStoryboard = NSStoryboard.init(name: NSStoryboard.Name("Main"), bundle: nil)
+        let ident = NSStoryboard.SceneIdentifier("SettingsPopupController")
+        guard let settingsController = mainStoryboard.instantiateController(withIdentifier: ident) as? SettingsPopupController else {
+              fatalError("Why cant i find SettingsPopupController? - Check Main.storyboard")
+            }
+        return settingsController
+    }
+    
+    @IBAction func saveUserSettings(_ sender: Any) {
+        userSettings.set(Int(settingsIconsSize.titleOfSelectedItem!), forKey: "IconsSize")
+    }
+    
+    @IBAction func quitSwitchit(_ sender: NSButton) {
+        NSApp.terminate(self)
+    }
+    @IBAction func cancelSettings (_ sender: NSButton) {
+        appDelegate.closePopover(sender: self)
+//        switchitApp.activate(ignoringOtherApps: true)
+    }
+}
+

@@ -13,6 +13,7 @@
 		CBA978E622678BB100AC8601 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBA978E422678BB100AC8601 /* Main.storyboard */; };
 		CBA978F222678BB100AC8601 /* switchitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA978F122678BB100AC8601 /* switchitTests.swift */; };
 		CBA978FD22678BB100AC8601 /* switchitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA978FC22678BB100AC8601 /* switchitUITests.swift */; };
+		CBB9A8EE28995893003FEBA2 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB9A8ED28995893003FEBA2 /* EventMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		CBA978F822678BB100AC8601 /* switchitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = switchitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA978FC22678BB100AC8601 /* switchitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = switchitUITests.swift; sourceTree = "<group>"; };
 		CBA978FE22678BB100AC8601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBB9A8ED28995893003FEBA2 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				CBA978E722678BB100AC8601 /* Info.plist */,
 				CBA978E822678BB100AC8601 /* switchit.entitlements */,
 				CB50C26E23DB08C400EEB4DB /* switchit-Bridging-Header.h */,
+				CBB9A8ED28995893003FEBA2 /* EventMonitor.swift */,
 			);
 			path = switchit;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBB9A8EE28995893003FEBA2 /* EventMonitor.swift in Sources */,
 				CBA978E122678BB000AC8601 /* ViewController.swift in Sources */,
 				CBA978DF22678BB000AC8601 /* AppDelegate.swift in Sources */,
 			);
