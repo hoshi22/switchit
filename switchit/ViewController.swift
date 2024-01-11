@@ -13,7 +13,7 @@ import Carbon
 let initialListSize = 12
 let defaultIconsSize = 32
 let rowHeight = defaultIconsSize + 20
-let transparencyLvl = 0.90
+//let transparencyLvl = 0.90
 // ****
 
 var itemsQuantity = 12
@@ -21,8 +21,6 @@ let thisapp = NSApplication.shared
 var lastUsed = [0]
 
 let userSettings = UserDefaults.standard
-
-let appDelegate = NSApplication.shared.delegate as! AppDelegate
 
 class TableView: NSTableView {
     
@@ -114,13 +112,13 @@ class ViewController: NSViewController {
                 self.apps_list.append(app)
             }
         }
-	
+
     }
     
     func repaintListWindow() {
         // Setting semi-transparent background and window size
         self.view.window?.isOpaque = false
-        self.view.window?.backgroundColor = NSColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: transparencyLvl)
+//        self.view.window?.backgroundColor = NSColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: transparencyLvl)
         
         let toSize = tableView.numberOfRows >= initialListSize ? initialListSize : tableView.numberOfRows
         self.view.window?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + 60), display: true)
@@ -214,10 +212,6 @@ extension SettingsPopupController {
     
     @IBAction func quitSwitchit(_ sender: NSButton) {
         NSApp.terminate(self)
-    }
-    @IBAction func cancelSettings (_ sender: NSButton) {
-        appDelegate.closePopover(sender: self)
-//        switchitApp.activate(ignoringOtherApps: true)
     }
 }
 
