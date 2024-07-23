@@ -13,7 +13,8 @@ import Carbon
 let initialListSize = 12
 let defaultIconsSize = 32
 let rowHeight = defaultIconsSize + 20
-//let transparencyLvl = 0.90
+let transparencyLvl = 0.90
+let bgColor = NSColor(hex: "D6EAF8", alpha: transparencyLvl)
 // ****
 
 var itemsQuantity = 12
@@ -116,14 +117,16 @@ class ViewController: NSViewController {
     }
     
     func repaintListWindow() {
-        // Setting semi-transparent background and window size
-        self.view.window?.isOpaque = false
-//        self.view.window?.backgroundColor = NSColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: transparencyLvl)
+        let wnd = self.view.window
+        // Setting semi-transparent background, background color and window size
+        wnd?.backgroundColor = bgColor
+        wnd?.styleMask = [.titled, .fullSizeContentView]
+        wnd?.titleVisibility = .hidden
+        wnd?.titlebarAppearsTransparent = true
         
         let toSize = tableView.numberOfRows >= initialListSize ? initialListSize : tableView.numberOfRows
-        self.view.window?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + 60), display: true)
-        self.view.window?.styleMask = .hudWindow
-        self.view.window?.center()
+        wnd?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + 60), display: true)
+        wnd?.center()
     }
     
     override func viewDidLoad() {
@@ -178,6 +181,20 @@ extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
             cell?.textField?.stringValue = "***"
         }
         return cell
+    }
+}
+
+extension NSColor {
+    
+    convenience init(hex: String, alpha: CGFloat) {
+        let ui64 = UInt64(hex, radix: 16)
+        let value = ui64 != nil ? Int(ui64!) : 0
+        var components = (
+            R: CGFloat((value >> 16) & 0xff) / 255,
+            G: CGFloat((value >> 08) & 0xff) / 255,
+            B: CGFloat((value >> 00) & 0xff) / 255
+        )
+        self.init(red: components.R, green: components.G, blue: components.B, alpha: alpha)
     }
 }
 
