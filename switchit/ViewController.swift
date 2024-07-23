@@ -13,8 +13,9 @@ import Carbon
 let initialListSize = 12
 let defaultIconsSize = 32
 let rowHeight = defaultIconsSize + 20
+let heightOffset = 28
 let transparencyLvl = 0.90
-let bgColor = NSColor(hex: "D6EAF8", alpha: transparencyLvl)
+let bgColor = "F2F3F4"
 // ****
 
 var itemsQuantity = 12
@@ -119,13 +120,13 @@ class ViewController: NSViewController {
     func repaintListWindow() {
         let wnd = self.view.window
         // Setting semi-transparent background, background color and window size
-        wnd?.backgroundColor = bgColor
+        wnd?.backgroundColor = NSColor(hex: bgColor, alpha: transparencyLvl)
         wnd?.styleMask = [.titled, .fullSizeContentView]
         wnd?.titleVisibility = .hidden
         wnd?.titlebarAppearsTransparent = true
         
         let toSize = tableView.numberOfRows >= initialListSize ? initialListSize : tableView.numberOfRows
-        wnd?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + 60), display: true)
+        wnd?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + heightOffset), display: true)
         wnd?.center()
     }
     
@@ -189,7 +190,7 @@ extension NSColor {
     convenience init(hex: String, alpha: CGFloat) {
         let ui64 = UInt64(hex, radix: 16)
         let value = ui64 != nil ? Int(ui64!) : 0
-        var components = (
+        let components = (
             R: CGFloat((value >> 16) & 0xff) / 255,
             G: CGFloat((value >> 08) & 0xff) / 255,
             B: CGFloat((value >> 00) & 0xff) / 255
