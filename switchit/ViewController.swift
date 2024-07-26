@@ -15,7 +15,7 @@ let defaultIconsSize = 32
 let rowHeight = defaultIconsSize + 20
 let heightOffset = 28
 let transparencyLvl = 0.90
-let bgColor = "F2F3F4"
+var bgColor = NSColor(hex: "f2f3f4", alpha: transparencyLvl)
 // ****
 
 var itemsQuantity = 12
@@ -117,10 +117,10 @@ class ViewController: NSViewController {
 
     }
     
-    func repaintListWindow() {
+    @objc func repaintListWindow() {
         let wnd = self.view.window
         // Setting semi-transparent background, background color and window size
-        wnd?.backgroundColor = NSColor(hex: bgColor, alpha: transparencyLvl)
+        wnd?.backgroundColor = bgColor
         wnd?.styleMask = [.titled, .fullSizeContentView]
         wnd?.titleVisibility = .hidden
         wnd?.titlebarAppearsTransparent = true
@@ -202,6 +202,7 @@ extension NSColor {
 class SettingsPopupController: NSViewController {
     
     @IBOutlet weak var settingsIconsSize: NSPopUpButton!
+    @IBOutlet weak var settingsBgColor: NSColorWell!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,13 +212,10 @@ class SettingsPopupController: NSViewController {
         settingsIconsSize.selectItem(withTitle: userIconsSize ?? String(defaultIconsSize))
     }
     
-}
-	
-extension SettingsPopupController {
-    
     static func showSettingsWindow() -> SettingsPopupController {
         let mainStoryboard = NSStoryboard.init(name: NSStoryboard.Name("Main"), bundle: nil)
         let ident = NSStoryboard.SceneIdentifier("SettingsPopupController")
+        
         guard let settingsController = mainStoryboard.instantiateController(withIdentifier: ident) as? SettingsPopupController else {
               fatalError("Why cant i find SettingsPopupController? - Check Main.storyboard")
             }
@@ -226,10 +224,21 @@ extension SettingsPopupController {
     
     @IBAction func saveUserSettings(_ sender: Any) {
         userSettings.set(Int(settingsIconsSize.titleOfSelectedItem!), forKey: "IconsSize")
+//        userSettings.set(settingsBgColor.color, forKey: "MainWndBgColor")
+        switchitApp.mainWindow?.backgroundColor = settingsBgColor.color
+        print(switchitApp.windows)
+    }
+    
+    @IBAction func cancelUserSettings(_ sender: Any) {
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        let pop = appDelegate.popover
+        if pop.isShown {
+            pop.close()
+            switchitApp.activate(ignoringOtherApps: true)
+        }
     }
     
     @IBAction func quitSwitchit(_ sender: NSButton) {
         NSApp.terminate(self)
     }
 }
-
