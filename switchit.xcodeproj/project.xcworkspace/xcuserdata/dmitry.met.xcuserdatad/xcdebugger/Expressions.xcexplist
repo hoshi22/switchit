@@ -3,23 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "TableView.keyDown(with:):ViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "SettingsPopupController.viewDidLoad():ViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "userSettings">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in ViewController.refreshAppsList():ViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.refreshAppsList():ViewController.swift">
-      </ContextState>
-      <ContextState
          contextName = "static SwitchitSettingsViewController.settingsController():ViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -36,12 +19,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ViewController.apps_list.getter:ViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "apps_list">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "closure #1 in ViewController.refreshAppsList():ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.refreshAppsList():ViewController.swift">
       </ContextState>
       <ContextState
          contextName = "ViewController.tableView(_:viewFor:row:):ViewController.swift">
@@ -55,20 +36,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ViewController.viewDidLoad():ViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.view.titleVisibility">
-            </PersistentString>
-            <PersistentString
-               value = "self.view.frame.size">
-            </PersistentString>
-            <PersistentString
-               value = "currentApp.element.localizedName">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "AppDelegate.showPopover(sender:):AppDelegate.swift">
          <PersistentStrings>
             <PersistentString
@@ -77,10 +44,51 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "SettingsPopupController.viewDidLoad():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "userSettings">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TableView.keyDown(with:):ViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in AppDelegate.applicationDidFinishLaunching(_:):AppDelegate.swift">
          <PersistentStrings>
             <PersistentString
                value = "switchitApp.windows">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AppDelegate.switchitPreferences():AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSStoryboard(name: &quot;Main&quot;, bundle: nil)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.apps_list.getter:ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "apps_list">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.viewDidLoad():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentApp.element.localizedName">
+            </PersistentString>
+            <PersistentString
+               value = "self.view.frame.size">
+            </PersistentString>
+            <PersistentString
+               value = "self.view.titleVisibility">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

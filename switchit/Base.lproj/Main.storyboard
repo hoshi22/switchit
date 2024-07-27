@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XfG-lQ-9wD">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
@@ -686,7 +686,7 @@
             <objects>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <windowController storyboardIdentifier="mainWindowController" showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" identifier="switchitWindow" title="Switch It" separatorStyle="shadow" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" toolbarStyle="expanded" id="IQv-IB-iLA" customClass="SwitchitWindow" customModule="switchit" customModuleProvider="target">
+                    <window key="window" identifier="switchitWindow" title="Switch It" separatorStyle="shadow" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" toolbarStyle="expanded" id="IQv-IB-iLA">
                         <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
                         <rect key="contentRect" x="196" y="240" width="400" height="280"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -700,6 +700,44 @@
                 </windowController>
             </objects>
             <point key="canvasLocation" x="-863" y="-862"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="4uh-Ym-ULG">
+            <objects>
+                <windowController storyboardIdentifier="switchitSettingsWnd" id="noC-vQ-5wz" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="aD1-cx-02Y" customClass="switchitSettingsWnd">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" topStrut="YES"/>
+                        <rect key="contentRect" x="-2135" y="173" width="480" height="270"/>
+                        <rect key="screenRect" x="-2560" y="-289" width="2560" height="1415"/>
+                        <view key="contentView" id="KRM-pa-qLN">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="noC-vQ-5wz" id="oUT-lC-Ldx"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="SjG-g6-nED" kind="relationship" relationship="window.shadowedContentViewController" id="Wj2-I3-lvZ"/>
+                    </connections>
+                </windowController>
+                <customObject id="CnG-uN-zBV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1312" y="-330"/>
+        </scene>
+        <!--Settings Wnd-->
+        <scene sceneID="5GI-B1-Qpv">
+            <objects>
+                <viewController id="SjG-g6-nED" customClass="SettingsWnd" sceneMemberID="viewController">
+                    <view key="view" id="zZh-yk-R2h">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="XS1-qF-hNh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1283" y="164"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -830,124 +868,6 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-733" y="-370"/>
-        </scene>
-        <!--Window Controller-->
-        <scene sceneID="0Wv-PQ-Df7">
-            <objects>
-                <customObject id="5KH-ss-zf7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <windowController storyboardIdentifier="settingsWindowController" showSeguePresentationStyle="single" id="ULF-wf-F1X" sceneMemberID="viewController">
-                    <window key="window" identifier="switchitSettingsPopover" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="F2N-XP-P7n" customClass="SwitchitSettingsWindow">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="425" y="462" width="480" height="256"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
-                        <view key="contentView" id="CCv-Nt-B8J">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="256"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </view>
-                        <connections>
-                            <outlet property="delegate" destination="ULF-wf-F1X" id="frg-UD-X47"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="jYs-g0-Piz" kind="relationship" relationship="window.shadowedContentViewController" id="sEe-66-6Gm"/>
-                    </connections>
-                </windowController>
-            </objects>
-            <point key="canvasLocation" x="-1482" y="-265"/>
-        </scene>
-        <!--Settings Popup Controller-->
-        <scene sceneID="qZH-eN-ozd">
-            <objects>
-                <customObject id="EP8-Rn-rmh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="SettingsPopupController" showSeguePresentationStyle="single" id="jYs-g0-Piz" customClass="SettingsPopupController" customModule="switchit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="4e5-tG-SvE">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v4d-fc-sFH">
-                                <rect key="frame" x="355" y="13" width="112" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Quit Switchit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oR5-2C-jQK">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="quitSwitchit:" target="jYs-g0-Piz" id="1Yd-3e-85r"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QU8-Bj-pDE">
-                                <rect key="frame" x="256" y="13" width="108" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" inset="2" id="g46-Qf-2RU">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="cancelUserSettings:" target="jYs-g0-Piz" id="lh3-BJ-065"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ItJ-5t-1sF">
-                                <rect key="frame" x="154" y="13" width="110" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vWw-vG-Oyo">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="saveUserSettings:" target="jYs-g0-Piz" id="eJJ-wv-fv3"/>
-                                </connections>
-                            </button>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UUN-fH-Gk7">
-                                <rect key="frame" x="18" y="234" width="64" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Icons size" id="msZ-yy-Ol4">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oua-Eu-6Tc">
-                                <rect key="frame" x="18" y="200" width="111" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Background color" id="Frp-e5-mQV">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <colorWell identifier="settingsBgColor" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rlx-Tx-CKf">
-                                <rect key="frame" x="152" y="194" width="44" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </colorWell>
-                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Ot-se-Kgc">
-                                <rect key="frame" x="152" y="230" width="78" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="AAY-YT-v4v" id="2i5-39-6EK">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="H8g-Jv-2Ms">
-                                        <items>
-                                            <menuItem title="Item 1" state="on" id="AAY-YT-v4v"/>
-                                            <menuItem title="Item 2" id="Hc8-VS-rVS"/>
-                                            <menuItem title="Item 3" id="Rfo-2R-f19"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                            </popUpButton>
-                        </subviews>
-                    </view>
-                    <connections>
-                        <outlet property="settingsBgColor" destination="Rlx-Tx-CKf" id="dIM-uu-xsg"/>
-                        <outlet property="settingsIconsSize" destination="2Ot-se-Kgc" id="24t-vO-fVu"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="-993" y="314"/>
         </scene>
     </scenes>
     <resources>
