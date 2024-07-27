@@ -686,9 +686,10 @@
             <objects>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <windowController storyboardIdentifier="mainWindowController" showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" identifier="switchitWindow" title="Switch It" separatorStyle="shadow" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" toolbarStyle="expanded" id="IQv-IB-iLA">
+                    <window key="window" identifier="switchitWindow" title="Switch It" separatorStyle="shadow" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" toolbarStyle="expanded" titleVisibility="hidden" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" fullSizeContentView="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="400" height="280"/>
+                        <rect key="contentRect" x="196" y="240" width="489" height="280"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
@@ -699,16 +700,16 @@
                     </connections>
                 </windowController>
             </objects>
-            <point key="canvasLocation" x="-863" y="-862"/>
+            <point key="canvasLocation" x="-818.5" y="-862"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="4uh-Ym-ULG">
             <objects>
                 <windowController storyboardIdentifier="switchitSettingsWnd" id="noC-vQ-5wz" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="aD1-cx-02Y" customClass="switchitSettingsWnd">
+                    <window key="window" identifier="switchitPreferences" title="Switchit Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="aD1-cx-02Y">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" topStrut="YES"/>
-                        <rect key="contentRect" x="-2135" y="173" width="480" height="270"/>
+                        <rect key="contentRect" x="1400" y="619" width="480" height="270"/>
                         <rect key="screenRect" x="-2560" y="-289" width="2560" height="1415"/>
                         <view key="contentView" id="KRM-pa-qLN">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
@@ -724,20 +725,62 @@
                 </windowController>
                 <customObject id="CnG-uN-zBV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1312" y="-330"/>
+            <point key="canvasLocation" x="-1645" y="-857"/>
         </scene>
-        <!--Settings Wnd-->
+        <!--Sw Prefs Controller-->
         <scene sceneID="5GI-B1-Qpv">
             <objects>
-                <viewController id="SjG-g6-nED" customClass="SettingsWnd" sceneMemberID="viewController">
+                <viewController id="SjG-g6-nED" customClass="swPrefsController" customModule="switchit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="zZh-yk-R2h">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hm6-E7-x93">
+                                <rect key="frame" x="18" y="161" width="111" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Background color" id="ipz-Ig-0GQ">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <colorWell identifier="swBackgroundColor" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hNj-ZC-jC3">
+                                <rect key="frame" x="147" y="155" width="44" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changeBgColor:" target="SjG-g6-nED" id="MBT-ec-OJD"/>
+                                </connections>
+                            </colorWell>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dTz-nh-jQz">
+                                <rect key="frame" x="18" y="233" width="119" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Launch at login" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1sD-CP-93u">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hEz-qs-JAx">
+                                <rect key="frame" x="18" y="211" width="222" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Check for updates automatically" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="x9y-jt-hHD">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1qk-vB-5wM">
+                                <rect key="frame" x="20" y="194" width="440" height="5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                        </subviews>
                     </view>
+                    <connections>
+                        <outlet property="swBckColor" destination="hNj-ZC-jC3" id="pse-PO-Agq"/>
+                    </connections>
                 </viewController>
                 <customObject id="XS1-qF-hNh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1283" y="164"/>
+            <point key="canvasLocation" x="-1645" y="-346"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -867,7 +910,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-733" y="-370"/>
+            <point key="canvasLocation" x="-818" y="-355"/>
         </scene>
     </scenes>
     <resources>

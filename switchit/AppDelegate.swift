@@ -9,7 +9,7 @@
 import Cocoa
 import Carbon
 
-let switchitApp = NSApplication.shared
+var switchitWnds: [String: NSWindow] = [:]
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -18,6 +18,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusBarMenu = NSMenu(title: "Switchit App")
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        //***** Registering windows
+        for wnd in thisapp.windows {
+            if wnd.identifier?.rawValue != nil {
+                switchitWnds[wnd.identifier!.rawValue] = wnd
+            }
+        }
+        
+        //***** Restore user settings
+        if let bgColorData = UserDefaults.standard.object(forKey: "swBckColor") as? Data {
+            if let bgSelectedColor = NSKeyedUnarchiver.unarchiveObject(with:bgColorData as Data) as? NSColor {
+                switchitWnds["switchitWindow"]?.backgroundColor = bgSelectedColor
+            }
+        }
+
         //***** Registering global hot key handler
         var gMyHotKeyID = EventHotKeyID()
         gMyHotKeyID.signature = OSType(1234)
@@ -30,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         InstallEventHandler(GetApplicationEventTarget(), {(nextHanlder, theEvent, userData) -> OSStatus in
             var hkCom = EventHotKeyID()
             GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout.size(ofValue: EventHotKeyID.self), nil, &hkCom)
-            switchitApp.activate(ignoringOtherApps: true)
+            thisapp.activate(ignoringOtherApps: true)
             return 12345
         }, 1, &eventType, nil, nil)
         // Register hotkey "Option (Alt) + Tab"
@@ -58,9 +72,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func switchitPreferences() {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let swg = storyboard.instantiateController(withIdentifier: "switchitSettingsWnd") as! NSWindowController
-        swg.showWindow(self)
+        if switchitWnds["switchitPreferences"] == nil {
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            let swg = storyboard.instantiateController(withIdentifier: "switchitSettingsWnd") as! NSWindowController
+            switchitWnds["switchitPreferences"] = swg.window
+        }
+        switchitWnds["switchitPreferences"]?.orderFrontRegardless()
     }
     
     @objc func switchitQuit() {

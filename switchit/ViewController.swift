@@ -119,12 +119,7 @@ class ViewController: NSViewController {
     
     @objc func repaintListWindow() {
         let wnd = self.view.window
-        // Setting semi-transparent background, background color and window size
-        wnd?.backgroundColor = bgColor
-        wnd?.styleMask = [.titled, .fullSizeContentView]
-        wnd?.titleVisibility = .hidden
-        wnd?.titlebarAppearsTransparent = true
-        
+//        wnd?.styleMask = [.titled, .fullSizeContentView]
         let toSize = tableView.numberOfRows >= initialListSize ? initialListSize : tableView.numberOfRows
         wnd?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + heightOffset), display: true)
         wnd?.center()
@@ -136,9 +131,8 @@ class ViewController: NSViewController {
         tableView.dataSource = self
         tableView.rowHeight = CGFloat(rowHeight)
         self.refreshAppsList()
-        tableView.reloadData()
+        tableView.reloadData()        
         self.repaintListWindow()
-        NSApp.setActivationPolicy(.accessory)
     }
     
     override func viewWillAppear() {
