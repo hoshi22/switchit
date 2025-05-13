@@ -13,7 +13,9 @@ import Carbon
 let initialListSize = 12
 let defaultIconsSize = 32
 let rowHeight = defaultIconsSize + 20
-//let transparencyLvl = 0.90
+let heightOffset = 28
+let transparencyLvl = 0.90
+var bgColor = NSColor(hex: "f2f3f4", alpha: transparencyLvl)
 // ****
 
 var itemsQuantity = 12
@@ -115,15 +117,12 @@ class ViewController: NSViewController {
 
     }
     
-    func repaintListWindow() {
-        // Setting semi-transparent background and window size
-        self.view.window?.isOpaque = false
-//        self.view.window?.backgroundColor = NSColor(red: 255 / 255.0, green: 255 / 255.0, blue: 255 / 255.0, alpha: transparencyLvl)
-        
+    @objc func repaintListWindow() {
+        let wnd = self.view.window
+//        wnd?.styleMask = [.titled, .fullSizeContentView]
         let toSize = tableView.numberOfRows >= initialListSize ? initialListSize : tableView.numberOfRows
-        self.view.window?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + 60), display: true)
-        self.view.window?.styleMask = .hudWindow
-        self.view.window?.center()
+        wnd?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + heightOffset), display: true)
+        wnd?.center()
     }
     
     override func viewDidLoad() {
@@ -132,9 +131,8 @@ class ViewController: NSViewController {
         tableView.dataSource = self
         tableView.rowHeight = CGFloat(rowHeight)
         self.refreshAppsList()
-        tableView.reloadData()
+        tableView.reloadData()        
         self.repaintListWindow()
-        NSApp.setActivationPolicy(.accessory)
     }
     
     override func viewWillAppear() {
@@ -181,37 +179,16 @@ extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
     }
 }
 
-class SettingsPopupController: NSViewController {
+extension NSColor {
     
-    @IBOutlet weak var settingsIconsSize: NSPopUpButton!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        settingsIconsSize.removeAllItems()
-        settingsIconsSize.addItems(withTitles: ["24", "32", "40", "48"])
-        let userIconsSize = userSettings.object(forKey: "IconsSize") as? String
-        settingsIconsSize.selectItem(withTitle: userIconsSize ?? String(defaultIconsSize))
-    }
-    
-}
-	
-extension SettingsPopupController {
-    
-    static func showSettingsWindow() -> SettingsPopupController {
-        let mainStoryboard = NSStoryboard.init(name: NSStoryboard.Name("Main"), bundle: nil)
-        let ident = NSStoryboard.SceneIdentifier("SettingsPopupController")
-        guard let settingsController = mainStoryboard.instantiateController(withIdentifier: ident) as? SettingsPopupController else {
-              fatalError("Why cant i find SettingsPopupController? - Check Main.storyboard")
-            }
-        return settingsController
-    }
-    
-    @IBAction func saveUserSettings(_ sender: Any) {
-        userSettings.set(Int(settingsIconsSize.titleOfSelectedItem!), forKey: "IconsSize")
-    }
-    
-    @IBAction func quitSwitchit(_ sender: NSButton) {
-        NSApp.terminate(self)
+    convenience init(hex: String, alpha: CGFloat) {
+        let ui64 = UInt64(hex, radix: 16)
+        let value = ui64 != nil ? Int(ui64!) : 0
+        let components = (
+            R: CGFloat((value >> 16) & 0xff) / 255,
+            G: CGFloat((value >> 08) & 0xff) / 255,
+            B: CGFloat((value >> 00) & 0xff) / 255
+        )
+        self.init(red: components.R, green: components.G, blue: components.B, alpha: alpha)
     }
 }
-

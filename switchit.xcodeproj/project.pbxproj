@@ -13,7 +13,7 @@
 		CBA978E622678BB100AC8601 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBA978E422678BB100AC8601 /* Main.storyboard */; };
 		CBA978F222678BB100AC8601 /* switchitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA978F122678BB100AC8601 /* switchitTests.swift */; };
 		CBA978FD22678BB100AC8601 /* switchitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA978FC22678BB100AC8601 /* switchitUITests.swift */; };
-		CBB9A8EE28995893003FEBA2 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB9A8ED28995893003FEBA2 /* EventMonitor.swift */; };
+		CBE82C3E2C550F3400C8BA56 /* SwitchitPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE82C3D2C550F3400C8BA56 /* SwitchitPreferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CB50C26E23DB08C400EEB4DB /* switchit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "switchit-Bridging-Header.h"; sourceTree = "<group>"; };
+		CB772EF42C54DDC700E9CDF1 /* switchit-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "switchit-Bridging-Header.h"; sourceTree = "<group>"; };
 		CBA978DB22678BB000AC8601 /* switchit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = switchit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA978DE22678BB000AC8601 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CBA978E022678BB000AC8601 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		CBA978F822678BB100AC8601 /* switchitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = switchitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA978FC22678BB100AC8601 /* switchitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = switchitUITests.swift; sourceTree = "<group>"; };
 		CBA978FE22678BB100AC8601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CBB9A8ED28995893003FEBA2 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		CBE82C3D2C550F3400C8BA56 /* SwitchitPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchitPreferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,13 +100,13 @@
 			isa = PBXGroup;
 			children = (
 				CBA978DE22678BB000AC8601 /* AppDelegate.swift */,
+				CB772EF42C54DDC700E9CDF1 /* switchit-Bridging-Header.h */,
 				CBA978E022678BB000AC8601 /* ViewController.swift */,
 				CBA978E222678BB100AC8601 /* Assets.xcassets */,
 				CBA978E422678BB100AC8601 /* Main.storyboard */,
 				CBA978E722678BB100AC8601 /* Info.plist */,
 				CBA978E822678BB100AC8601 /* switchit.entitlements */,
-				CB50C26E23DB08C400EEB4DB /* switchit-Bridging-Header.h */,
-				CBB9A8ED28995893003FEBA2 /* EventMonitor.swift */,
+				CBE82C3D2C550F3400C8BA56 /* SwitchitPreferences.swift */,
 			);
 			path = switchit;
 			sourceTree = "<group>";
@@ -260,7 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBB9A8EE28995893003FEBA2 /* EventMonitor.swift in Sources */,
+				CBE82C3E2C550F3400C8BA56 /* SwitchitPreferences.swift in Sources */,
 				CBA978E122678BB000AC8601 /* ViewController.swift in Sources */,
 				CBA978DF22678BB000AC8601 /* AppDelegate.swift in Sources */,
 			);
@@ -433,8 +433,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = switchit/switchit.entitlements;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7TXR9WFP4K;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -459,8 +461,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = switchit/switchit.entitlements;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7TXR9WFP4K;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
