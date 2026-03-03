@@ -42,64 +42,50 @@ class TableView: NSTableView {
         let kCode = event.keyCode
         let actOpts: NSApplication.ActivationOptions = [.activateAllWindows, .activateIgnoringOtherApps]
         
+        // Capture selected row before any hiding, since hiding can invalidate it
+        let selectedRow = self.selectedRow
+        
         var currpos: Int? = nil
         switch kCode {
         case 36: // Enter
-            currpos = -1
-            NSApp.hide(self)
+            currpos = selectedRow
         case 29, 82: // 0
             currpos = 0
-            NSApp.hide(self)
         case 18, 83: // 1
             currpos = 1
-            NSApp.hide(self)
         case 19, 84: // 2
             currpos = 2
-            NSApp.hide(self)
         case 20, 85: // 3
             currpos = 3
-            NSApp.hide(self)
         case 21, 86: // 4
             currpos = 4
-            NSApp.hide(self)
         case 23, 87: // 5
             currpos = 5
-            NSApp.hide(self)
         case 22, 88: // 6
             currpos = 6
-            NSApp.hide(self)
         case 26, 89: // 7
             currpos = 7
-            NSApp.hide(self)
         case 28, 91: // 8
-             currpos = 8
-            NSApp.hide(self)
+            currpos = 8
         case 25, 92: // 9
             currpos = 9
-            NSApp.hide(self)
         case 53: // "esc" pressed
             NSApp.hide(self)
         default:
             super.keyDown(with: event)
         }
-        if currpos != nil {
+        if let pos = currpos, pos >= 0, pos < apps.count {
+            self.updateHistory(pos: pos)
+            _ = apps[pos].activate(options: actOpts)
             NSRunningApplication.current.hide()
-            if currpos! >= 0 {
-                _ = apps[currpos!].activate(options: actOpts)
-                self.updateHistory(pos: currpos!)
-            }
-            else {
-                _ = apps[self.selectedRow].activate(options: actOpts)
-                self.updateHistory()
-                NSApp.hide(self)
-            }
+            NSApp.hide(self)
         }
     }
 }
 
 class ViewController: NSViewController {
 
-    @IBOutlet weak var tableView: TableView!
+    @IBOutlet public weak var tableView: TableView!
     var apps_list: [NSRunningApplication] = []
 
     // Refresh list of applications running
@@ -111,7 +97,9 @@ class ViewController: NSViewController {
         for app in apps {
             // Would like to see only running GUI apps
             if app.activationPolicy.rawValue == 0 {
-                self.apps_list.append(app)
+                if app.localizedName! != "switchit" {
+                    self.apps_list.append(app)
+                }
             }
         }
 
@@ -119,7 +107,6 @@ class ViewController: NSViewController {
     
     @objc func repaintListWindow() {
         let wnd = self.view.window
-//        wnd?.styleMask = [.titled, .fullSizeContentView]
         let toSize = tableView.numberOfRows >= initialListSize ? initialListSize : tableView.numberOfRows
         wnd?.setFrame(CGRect(x: 0, y: 0, width: 400, height: (toSize * rowHeight) + heightOffset), display: true)
         wnd?.center()
@@ -131,8 +118,9 @@ class ViewController: NSViewController {
         tableView.dataSource = self
         tableView.rowHeight = CGFloat(rowHeight)
         self.refreshAppsList()
-        tableView.reloadData()        
+        tableView.reloadData()
         self.repaintListWindow()
+        thisapp.setActivationPolicy(.accessory)
     }
     
     override func viewWillAppear() {
@@ -155,7 +143,7 @@ extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let item = (self.apps_list)[row]
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as? NSTableCellView
-        let iconsSize = userSettings.object(forKey: "IconsSize") as? Int ?? defaultIconsSize
+        let iconsSize = userSettings.object(forKey: "swIconsSize") as? Int ?? defaultIconsSize
         switch tableColumn!.identifier.rawValue {
         case "Num":
             if row < 10 {
